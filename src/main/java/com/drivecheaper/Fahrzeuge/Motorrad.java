@@ -1,19 +1,12 @@
 package com.drivecheaper.Fahrzeuge;
 
-public class Motorrad  extends Fahrzeug {
+
+public class Motorrad extends Fahrzeug {
 
     private String motorradType;
 
-    public Motorrad(int fahrzeug_id, String hersteller, String modell, String kennzeichen, int baujahr, double kilometerstand, double tageskosten, boolean status, double tankfuellung, double kaution, KraftstoffArt kraftstoffArt, String motorradType) {
-        super(fahrzeug_id, hersteller, modell, kennzeichen, baujahr, kilometerstand, tageskosten, status, tankfuellung, kaution, kraftstoffArt);
-        this.motorradType = motorradType;
-    }
-
-    public String getMotorradType() {
-        return motorradType;
-    }
-
-    public void setMotorradType(String motorradType) {
+    public Motorrad(int fahrzeug_id, String hersteller, String modell, String kennzeichen, double kilometerstand, int baujahr, double tageskosten, boolean status, double tankfuellung, double kaution, KraftstoffArt kraftstoffArt) {
+        super(fahrzeug_id, hersteller, modell, kennzeichen, kilometerstand, baujahr, tageskosten, status, tankfuellung, kaution, kraftstoffArt);
         this.motorradType = motorradType;
     }
 
@@ -21,4 +14,7 @@ public class Motorrad  extends Fahrzeug {
     public String getDetails() {
         return getHersteller() + " " + getModell() + " (Motorrad Type: " + motorradType + ")";
     }
+
 }
+
+

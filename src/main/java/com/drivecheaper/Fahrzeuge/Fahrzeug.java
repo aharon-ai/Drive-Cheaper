@@ -13,13 +13,13 @@ public abstract class Fahrzeug {
     private double kaution;
     private KraftstoffArt kraftstoffArt;
 
-    public Fahrzeug(int fahrzeug_id, String hersteller, String modell, String kennzeichen, int baujahr, double kilometerstand, double tageskosten, boolean status, double tankfuellung, double kaution, KraftstoffArt kraftstoffArt) {
+    public Fahrzeug(int fahrzeug_id, String hersteller, String modell, String kennzeichen, double kilometerstand, int baujahr, double tageskosten, boolean status, double tankfuellung, double kaution, KraftstoffArt kraftstoffArt) {
         this.fahrzeug_id = fahrzeug_id;
         this.hersteller = hersteller;
         this.modell = modell;
         this.kennzeichen = kennzeichen;
-        this.baujahr = baujahr;
         this.kilometerstand = kilometerstand;
+        this.baujahr = baujahr;
         this.tageskosten = tageskosten;
         this.status = status;
         this.tankfuellung = tankfuellung;
@@ -134,9 +134,3 @@ public abstract class Fahrzeug {
                 '}';
     }
 }
-
-
-
-
-
-
