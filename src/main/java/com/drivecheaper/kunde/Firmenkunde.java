@@ -19,22 +19,27 @@ public class Firmenkunde extends Kunde {
     }
 
     public void setFirmenName(String firmenName) {
+
         this.firmenName = firmenName;
     }
 
     public String getAnsprechpartner() {
+
         return ansprechpartner;
     }
 
     public void setAnsprechpartner(String ansprechpartner) {
+
         this.ansprechpartner = ansprechpartner;
     }
 
     public double getRabatt() {
+
         return rabatt;
     }
 
     public void setRabatt(double rabatt) {
+
         this.rabatt = rabatt;
     }
 }

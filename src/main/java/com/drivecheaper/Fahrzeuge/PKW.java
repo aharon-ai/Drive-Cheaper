@@ -11,6 +11,12 @@ public class PKW extends Fahrzeug {
         this.sitzPlaetze = sitzPlaetze;
     }
 
+    // Ein standart Construktor fur die Mitarbeiter
+    public PKW(int fahrzeug_id, boolean status, String hersteller, String modell, String kennzeichen) {
+        super(fahrzeug_id, status, hersteller, modell, kennzeichen);
+    }
+
+
     public String getFarbe() {
 
         return farbe;
@@ -25,6 +31,8 @@ public class PKW extends Fahrzeug {
 
         return sitzPlaetze;
     }
+
+
 
     public void setSitzPlaetze(int sitzPlaetze) {
         this.sitzPlaetze = sitzPlaetze;

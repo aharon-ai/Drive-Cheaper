@@ -27,6 +27,18 @@ public abstract class Fahrzeug {
         this.kraftstoffArt = kraftstoffArt;
     }
 
+    public Fahrzeug(int fahrzeug_id, boolean status, String hersteller, String modell, String kennzeichen) {
+        this.fahrzeug_id = fahrzeug_id;
+        this.status = status;
+        this.hersteller = hersteller;
+        this.modell = modell;
+        this.kennzeichen = kennzeichen;
+    }
+
+    public Fahrzeug() {
+
+    }
+
     public abstract String getDetails();
 
     public int getFahrzeug_id() {
