@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d8f87199-a6c2-43bb-9816-d13e3a11bcbc" name="Changes" comment="initial commit">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DAO/FahrzeugDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveCheaperApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Mitarbeiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/CreateAndInsert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/CreateAndInsert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/MitarbeiterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/PKW.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/PKW.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Firmenkunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Firmenkunde.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/drivecheaper-wiev.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/Mitarbeiter-wiev.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="37" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aharon-ai/Drive-Cheaper.git&quot;,
+    &quot;accountId&quot;: &quot;a3cdab35-9fbf-4534-b07a-2c38e5fd58fb&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3B4sBuFgke2TORzQJBi333K0YrI" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CreateAndInsert.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DriveApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DriveCheaperApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="DriveApp" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.drivecheaper.DriveCheaperApp" />
+      <module name="drivecheaper" />
+      <option name="VM_PARAMETERS" value="--enable-native-access=javafx.graphics" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.drivecheaper.fahrzeuge.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DriveApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d8f87199-a6c2-43bb-9816-d13e3a11bcbc" name="Changes" comment="" />
+      <created>1773759550932</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773759550932</updated>
+      <workItem from="1773759558827" duration="4436000" />
+      <workItem from="1773829414577" duration="3630000" />
+      <workItem from="1773841986639" duration="2076000" />
+      <workItem from="1773845883053" duration="1492000" />
+      <workItem from="1773847751369" duration="2090000" />
+      <workItem from="1773850435789" duration="6439000" />
+      <workItem from="1773948723784" duration="123000" />
+      <workItem from="1773948910031" duration="17000" />
+      <workItem from="1773949180218" duration="421000" />
+      <workItem from="1773949636926" duration="428000" />
+      <workItem from="1773950249626" duration="911000" />
+      <workItem from="1773951324006" duration="1162000" />
+      <workItem from="1773952834561" duration="18000" />
+      <workItem from="1773953240753" duration="3284000" />
+      <workItem from="1773956574875" duration="14895000" />
+      <workItem from="1774005010669" duration="6746000" />
+      <workItem from="1774014535388" duration="3391000" />
+      <workItem from="1774018023267" duration="55000" />
+      <workItem from="1774018120014" duration="2078000" />
+      <workItem from="1774021267490" duration="27000" />
+      <workItem from="1774021388850" duration="653000" />
+      <workItem from="1774022265089" duration="427000" />
+      <workItem from="1774252267466" duration="2960000" />
+      <workItem from="1774258372003" duration="6000" />
+      <workItem from="1774258453977" duration="1068000" />
+      <workItem from="1774259612263" duration="403000" />
+      <workItem from="1774260041974" duration="440000" />
+      <workItem from="1774260556091" duration="1878000" />
+      <workItem from="1774262504122" duration="699000" />
+      <workItem from="1774264642903" duration="76000" />
+      <workItem from="1774264788778" duration="162000" />
+      <workItem from="1774265121825" duration="377000" />
+      <workItem from="1774265681909" duration="17000" />
+      <workItem from="1774265778349" duration="35000" />
+      <workItem from="1774265828208" duration="59000" />
+      <workItem from="1774265954444" duration="40000" />
+      <workItem from="1774266043400" duration="15000" />
+      <workItem from="1774266086515" duration="23000" />
+      <workItem from="1774266131666" duration="21000" />
+      <workItem from="1774266174982" duration="389000" />
+      <workItem from="1774266699130" duration="16977000" />
+      <workItem from="1774284329387" duration="2846000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1774002690619</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774002690619</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1774012678130</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774012678130</updated>
+    </task>
+    <task id="LOCAL-00003" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1774017876629</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774017876629</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+</project>

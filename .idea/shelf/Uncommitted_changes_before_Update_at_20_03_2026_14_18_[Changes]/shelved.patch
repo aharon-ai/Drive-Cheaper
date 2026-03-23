@@ -1,0 +1,176 @@
+Index: src/main/java/com/drivecheaper/Fahrzeuge/KraftstoffArt.java
+===================================================================
+diff --git a/src/main/java/com/drivecheaper/Fahrzeuge/KraftstoffArt.java b/src/main/java/com/drivecheaper/fahrzeuge/KraftstoffArt.java
+rename from src/main/java/com/drivecheaper/Fahrzeuge/KraftstoffArt.java
+rename to src/main/java/com/drivecheaper/fahrzeuge/KraftstoffArt.java
+--- a/src/main/java/com/drivecheaper/Fahrzeuge/KraftstoffArt.java	(revision 6edc21834d7dce28b8837d530cf72700a4a5b639)
++++ b/src/main/java/com/drivecheaper/fahrzeuge/KraftstoffArt.java	(date 1774005135536)
+@@ -1,4 +1,4 @@
+-package com.drivecheaper.Fahrzeuge;
++package com.drivecheaper.fahrzeuge;
+ 
+ public enum KraftstoffArt {
+     BENZIN, DIESEL, ELEKTRO, HYBRID;
+Index: src/main/java/com/drivecheaper/Fahrzeuge/LKW.java
+===================================================================
+diff --git a/src/main/java/com/drivecheaper/Fahrzeuge/LKW.java b/src/main/java/com/drivecheaper/fahrzeuge/LKW.java
+rename from src/main/java/com/drivecheaper/Fahrzeuge/LKW.java
+rename to src/main/java/com/drivecheaper/fahrzeuge/LKW.java
+--- a/src/main/java/com/drivecheaper/Fahrzeuge/LKW.java	(revision 6edc21834d7dce28b8837d530cf72700a4a5b639)
++++ b/src/main/java/com/drivecheaper/fahrzeuge/LKW.java	(date 1774005135578)
+@@ -1,4 +1,4 @@
+-package com.drivecheaper.Fahrzeuge;
++package com.drivecheaper.fahrzeuge;
+ 
+ public class LKW  extends Fahrzeug{
+ 
+Index: src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java
+===================================================================
+diff --git a/src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java b/src/main/java/com/drivecheaper/fahrzeuge/Fahrzeug.java
+rename from src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java
+rename to src/main/java/com/drivecheaper/fahrzeuge/Fahrzeug.java
+--- a/src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java	(revision 6edc21834d7dce28b8837d530cf72700a4a5b639)
++++ b/src/main/java/com/drivecheaper/fahrzeuge/Fahrzeug.java	(date 1774009977068)
+@@ -1,4 +1,4 @@
+-package com.drivecheaper.Fahrzeuge;
++package com.drivecheaper.fahrzeuge;
+ 
+ public abstract class Fahrzeug {
+     private int fahrzeug_id;
+@@ -30,18 +30,22 @@
+     public abstract String getDetails();
+ 
+     public int getFahrzeug_id() {
++
+         return fahrzeug_id;
+     }
+ 
+     public void setFahrzeug_id(int fahrzeug_id) {
++
+         this.fahrzeug_id = fahrzeug_id;
+     }
+ 
+     public String getHersteller() {
++
+         return hersteller;
+     }
+ 
+     public void setHersteller(String hersteller) {
++
+         this.hersteller = hersteller;
+     }
+ 
+@@ -50,70 +54,87 @@
+     }
+ 
+     public void setModell(String modell) {
++
+         this.modell = modell;
+     }
+ 
+     public String getKennzeichen() {
++
+         return kennzeichen;
+     }
+ 
+     public void setKennzeichen(String kennzeichen) {
++
+         this.kennzeichen = kennzeichen;
+     }
+ 
+     public int getBaujahr() {
++
+         return baujahr;
+     }
+ 
+     public void setBaujahr(int baujahr) {
++
+         this.baujahr = baujahr;
+     }
+ 
+     public double getKilometerstand() {
++
+         return kilometerstand;
+     }
+ 
+     public void setKilometerstand(double kilometerstand) {
++
+         this.kilometerstand = kilometerstand;
+     }
+ 
+     public double getTageskosten() {
++
+         return tageskosten;
+     }
+ 
+     public void setTageskosten(double tageskosten) {
++
+         this.tageskosten = tageskosten;
+     }
+ 
+     public boolean isStatus() {
++
+         return status;
+     }
+ 
+     public void setStatus(boolean status) {
++
+         this.status = status;
+     }
+ 
+     public double getTankfuellung() {
++
+         return tankfuellung;
+     }
+ 
+     public void setTankfuellung(double tankfuellung) {
++
+         this.tankfuellung = tankfuellung;
+     }
+ 
+     public double getKaution() {
++
+         return kaution;
+     }
+ 
+     public void setKaution(double kaution) {
++
+         this.kaution = kaution;
+     }
+ 
+     public KraftstoffArt getKraftstoffArt() {
++
+         return kraftstoffArt;
+     }
+ 
+     public void setKraftstoffArt(KraftstoffArt kraftstoffArt) {
++
+         this.kraftstoffArt = kraftstoffArt;
+     }
+ 
+Index: src/main/java/com/drivecheaper/Fahrzeuge/PKW.java
+===================================================================
+diff --git a/src/main/java/com/drivecheaper/Fahrzeuge/PKW.java b/src/main/java/com/drivecheaper/fahrzeuge/PKW.java
+rename from src/main/java/com/drivecheaper/Fahrzeuge/PKW.java
+rename to src/main/java/com/drivecheaper/fahrzeuge/PKW.java
+--- a/src/main/java/com/drivecheaper/Fahrzeuge/PKW.java	(revision 6edc21834d7dce28b8837d530cf72700a4a5b639)
++++ b/src/main/java/com/drivecheaper/fahrzeuge/PKW.java	(date 1774005135480)
+@@ -1,4 +1,4 @@
+-package com.drivecheaper.Fahrzeuge;
++package com.drivecheaper.fahrzeuge;
+ 
+ public class PKW extends Fahrzeug {
+ 
+Index: src/main/java/com/drivecheaper/Fahrzeuge/Motorrad.java
+===================================================================
+diff --git a/src/main/java/com/drivecheaper/Fahrzeuge/Motorrad.java b/src/main/java/com/drivecheaper/fahrzeuge/Motorrad.java
+rename from src/main/java/com/drivecheaper/Fahrzeuge/Motorrad.java
+rename to src/main/java/com/drivecheaper/fahrzeuge/Motorrad.java
+--- a/src/main/java/com/drivecheaper/Fahrzeuge/Motorrad.java	(revision 6edc21834d7dce28b8837d530cf72700a4a5b639)
++++ b/src/main/java/com/drivecheaper/fahrzeuge/Motorrad.java	(date 1774005135704)
+@@ -1,4 +1,4 @@
+-package com.drivecheaper.Fahrzeuge;
++package com.drivecheaper.fahrzeuge;
+ 
+ public class Motorrad  extends Fahrzeug {
+ 

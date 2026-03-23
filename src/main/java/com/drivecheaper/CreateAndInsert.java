@@ -24,23 +24,23 @@ public class CreateAndInsert {
             statement = connection.createStatement();
 
             // Datenbank und Tabelle erstellen
-            statement.executeUpdate("DROP DATABASE IF EXISTS firma2");
-            statement.executeUpdate("CREATE DATABASE firma2");
-            statement.executeUpdate("USE firma2");
+            statement.executeUpdate("DROP DATABASE IF EXISTS drivecheaper");
+            statement.executeUpdate("CREATE DATABASE drivecheaper");
+            statement.executeUpdate("USE drivecheaper");
 
             statement.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS personen (
-                    name VARCHAR(30),
-                    vorname VARCHAR(25),
-                    personalnummer INT,
-                    gehalt DOUBLE,
-                    geburtstag DATE,
-                    PRIMARY KEY (personalnummer)
+                CREATE TABLE IF NOT EXISTS fahrzeug (
+                    fahrzeug_id INT,
+                    status BOOLEAN,
+                    hersteller VARCHAR(50),                    
+                    modell VARCHAR(50),
+                   kennzeichen VARCHAR(30),
+                    PRIMARY KEY (fahrzeug_id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8
             """);
 
             String insertQuery = """
-                INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag)
+                INSERT INTO fahrzeug (fahrzeug_id, status,  hersteller, modell, kennzeichen)
                 VALUES (?, ?, ?, ?, ?)
             """;
 
@@ -51,32 +51,32 @@ public class CreateAndInsert {
 
             try {
                 // Datensätze einfügen
-                preparedStatement.setString(1, "Maier");
-                preparedStatement.setString(2, "Alex");
-                preparedStatement.setInt(3, 6714);
-                preparedStatement.setDouble(4, 3500);
-                preparedStatement.setDate(5, java.sql.Date.valueOf("1962-03-15"));
+                preparedStatement.setInt(1, 1);
+                preparedStatement.setBoolean(2, true);
+                preparedStatement.setString(3, "VW");
+                preparedStatement.setString(4, "Golf");
+                preparedStatement.setString(5, "K-AB 123");
                 preparedStatement.executeUpdate();
 
-                preparedStatement.setString(1, "Schmitz");
-                preparedStatement.setString(2, "Peter");
-                preparedStatement.setInt(3, 7777);
-                preparedStatement.setDouble(4, 3750);
-                preparedStatement.setDate(5, java.sql.Date.valueOf("1958-04-12"));
+                preparedStatement.setInt(1, 2);
+                preparedStatement.setBoolean(2, true);
+                preparedStatement.setString(3, "Mersedes");
+                preparedStatement.setString(4, "E-Klass");
+                preparedStatement.setString(5, "K-BC 456");
                 preparedStatement.executeUpdate();
 
-                preparedStatement.setString(1, "Acilles");
-                preparedStatement.setString(2, "Albrecht");
-                preparedStatement.setInt(3, 8888);
-                preparedStatement.setDouble(4, 8888.8);
-                preparedStatement.setDate(5, java.sql.Date.valueOf("1988-08-08"));
+                preparedStatement.setInt(1, 3);
+                preparedStatement.setBoolean(2, false);
+                preparedStatement.setString(3, "BMW");
+                preparedStatement.setString(4, "X5");
+                preparedStatement.setString(5, "K-CD 404");
                 preparedStatement.executeUpdate();
 
-                preparedStatement.setString(1, "Meterns");
-                preparedStatement.setString(2, "Julia");
-                preparedStatement.setInt(3, 9787);
-                preparedStatement.setDouble(4, 3621.5);
-                preparedStatement.setDate(5, java.sql.Date.valueOf("1959-12-30"));
+                preparedStatement.setInt(1, 4);
+                preparedStatement.setBoolean(2, true);
+                preparedStatement.setString(3, "Toyota");
+                preparedStatement.setString(4, "Verso");
+                preparedStatement.setString(5, "K-CD 444");
                 preparedStatement.executeUpdate();
 
                 // Commit
