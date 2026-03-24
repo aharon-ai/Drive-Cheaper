@@ -30,7 +30,7 @@ public class CreateAndInsert {
 
             statement.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS fahrzeug (
-                    fahrzeug_id INT,
+                    fahrzeug_id INT NOT NULL AUTO_INCREMENT,
                     status BOOLEAN,
                     hersteller VARCHAR(50),                    
                     modell VARCHAR(50),
@@ -60,7 +60,7 @@ public class CreateAndInsert {
 
                 preparedStatement.setInt(1, 2);
                 preparedStatement.setBoolean(2, true);
-                preparedStatement.setString(3, "Mersedes");
+                preparedStatement.setString(3, "Mercedes");
                 preparedStatement.setString(4, "E-Klass");
                 preparedStatement.setString(5, "K-BC 456");
                 preparedStatement.executeUpdate();

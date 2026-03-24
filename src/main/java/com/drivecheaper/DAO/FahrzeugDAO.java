@@ -9,6 +9,38 @@ import java.sql.*;
 
 public class FahrzeugDAO {
 
+    public static boolean autoHinzufuegen(String hersteller, String modell, String kennzeichen) {
+        String insertQuery = """
+                INSERT INTO fahrzeug ( status,  hersteller, modell, kennzeichen)
+                VALUES (1, ?, ?, ?)
+            """;
+       try {
+           // 1. Verbindung herstellen
+           Connection connection = DriverManager.getConnection(
+                   "jdbc:mysql://localhost:3306/drivecheaper",
+                   "root",
+                   "user1234"
+           );
+           // 2. Das PreparedStatment mit unserem SQL-Text erstellen
+           PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+
+           // 3. Die Fragezeichen (?) der Reihe nach mit unseren Variablen füllen!
+           // Das erste Fragezeichen (1) bekommt den Text (String) aus der Variable 'hersteller'
+           preparedStatement.setString(1, hersteller);
+           preparedStatement.setString(2, modell);
+           preparedStatement.setString(3, kennzeichen);
+
+
+
+           // 4. Den fertigen Befehl an die Datenbank abschicken(Update statt Query)
+           preparedStatement.executeUpdate();
+           return true; // Es hat geklapt
+       } catch (SQLException e) {
+           e.printStackTrace();
+           return false; // Es gab einen Fahler
+       }
+    }
+
     public static ObservableList<Fahrzeug> ladeAlleFahrzeuge() {
         //Connection connection = null;
         //Statement statement = null;
