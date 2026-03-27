@@ -1,4 +1,4 @@
-package com.drivecheaper.Fahrzeuge;
+package com.drivecheaper.model;
 
 
 public class Motorrad extends Fahrzeug {

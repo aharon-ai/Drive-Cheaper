@@ -1,4 +1,4 @@
-package com.drivecheaper.kunde;
+package com.drivecheaper.model;
 
 public abstract class Kunde {
     private int kunden_id;

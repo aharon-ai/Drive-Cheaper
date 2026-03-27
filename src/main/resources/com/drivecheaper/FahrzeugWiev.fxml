@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivecheaper.MitarbeiterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivecheaper.controllers.MitarbeiterController">
    <center>
       <TableView fx:id="tabelleFahrzeuge" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -39,6 +39,10 @@
                   <TextField fx:id="txtKennzeichen" />
                   <Separator prefWidth="200.0" />
                   <Button fx:id="btnNeue" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHizufugenKlicken" text="Hinzufügen" />
+                  <Separator prefWidth="200.0" />
+                  <Button fx:id="btnBearbeiten" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBearbeitenKlicken" text="Bearbeiten" />
+                  <Separator prefWidth="200.0" />
+                  <Button fx:id="btnLoeschen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoeschenKlicken" text="Löschen" />
                   <Separator prefWidth="200.0" />
                   <Button fx:id="btnAbbrechen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAbbrechenKlicken" text="Abbrechen" />
                </children>

@@ -1,4 +1,4 @@
-package com.drivecheaper.Fahrzeuge;
+package com.drivecheaper.model;
 
 public abstract class Fahrzeug {
     private int fahrzeug_id;

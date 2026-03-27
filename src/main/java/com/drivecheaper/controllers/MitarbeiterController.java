@@ -1,7 +1,7 @@
-package com.drivecheaper;
+package com.drivecheaper.controllers;
 
-import com.drivecheaper.DAO.FahrzeugDAO;
-import com.drivecheaper.Fahrzeuge.Fahrzeug;
+import com.drivecheaper.dao.FahrzeugDAO;
+import com.drivecheaper.model.Fahrzeug;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import com.drivecheaper.DAO.FahrzeugDAO;
-
-import java.sql.*;
-import java.util.ArrayList;
 
 
 public class MitarbeiterController {
@@ -97,7 +93,7 @@ public class MitarbeiterController {
 
                 // Kleiner Sicherheits-Check: Sind die Felder leer?
                 if (eingabeHersteller.isEmpty() || eingabeModell.isEmpty() || eingabeKennzeichen.isEmpty()) {
-                    System.out.println("Achtung: Die Felder mussen ");
+                    System.out.println("Achtung: Die Felder mussen ausgefuhlt sein");
                     return; // Bricht die methode ab
                 }
 
@@ -121,6 +117,16 @@ public class MitarbeiterController {
                 }
 
             }
+            @FXML
+            public void onBearbeitenKlicken(){
+
+            }
+
+            @FXML
+            public void onLoeschenKlicken(){
+
+            }
+
             @FXML
             public void onAbbrechenKlicken(){
                 txtHersteller.clear();

@@ -1,4 +1,4 @@
-package com.drivecheaper.kunde;
+package com.drivecheaper.model;
 
 public class Mitarbeiter {
 
