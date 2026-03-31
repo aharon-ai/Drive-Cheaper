@@ -5,14 +5,11 @@ import com.drivecheaper.model.Fahrzeug;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class MitarbeiterController {
+public class FahrzeugController {
 
     //wir brauchen eine Verbindung zur Fahrzeug
     //private Fahrzeug api = new Fahrzeug();
@@ -37,6 +34,22 @@ public class MitarbeiterController {
     private TextField txtModell;
     @FXML
     private TextField txtKennzeichen;
+    @FXML
+    private TextField txtBaujahr;
+    @FXML
+    private TextField txtKilometerstand;
+    @FXML
+    private TextField txtTageskosten;
+    @FXML
+    private CheckBox isStatus;
+    @FXML
+    private TextField txtKaution;
+    @FXML
+    private TextField txtFahrzeug_id;
+    @FXML
+    private TextField txtKraftstoffArt;
+    @FXML
+    private TextField txtTankfuellung;
 
     ObservableList<Fahrzeug> fahrzeugListe = FXCollections.observableArrayList();
 
@@ -90,6 +103,15 @@ public class MitarbeiterController {
                 String eingabeHersteller = txtHersteller.getText();
                 String eingabeModell = txtModell.getText();
                 String eingabeKennzeichen = txtKennzeichen.getText();
+                String eingabeTageskosten = txtTageskosten.getText();
+                String eingabeKaution = txtKaution.getText();
+                String eingabeBaujahr = txtBaujahr.getText();
+                String eingabeKilometerstand = txtKilometerstand.getText();
+                String eingabeKraftstoffArt = txtKraftstoffArt.getText();
+                String eingabeTankfuellung = txtTankfuellung.getText();
+
+                // WICHTIG: Hier wandeln wir das UI-Element in einen Datenwert (boolean) um!
+                boolean eingabeStatus = isStatus.isSelected();
 
                 // Kleiner Sicherheits-Check: Sind die Felder leer?
                 if (eingabeHersteller.isEmpty() || eingabeModell.isEmpty() || eingabeKennzeichen.isEmpty()) {
@@ -98,7 +120,11 @@ public class MitarbeiterController {
                 }
 
                 // 2. Die Daten an die Datenbank schicken
-                boolean erfolg = FahrzeugDAO.autoHinzufuegen(eingabeHersteller, eingabeModell, eingabeKennzeichen);
+                boolean erfolg = FahrzeugDAO.autoHinzufuegen(
+                        eingabeHersteller, eingabeModell, eingabeKennzeichen,
+                        eingabeBaujahr, eingabeKilometerstand, eingabeTageskosten,
+                        eingabeTankfuellung, eingabeKaution, eingabeKraftstoffArt
+                );
 
                 // 3. Das Specher ist erfolgreich: Tabelle update und Fehler leeren
                 if (erfolg) {
@@ -109,21 +135,77 @@ public class MitarbeiterController {
                     tabelleFahrzeuge.setItems(fahrzeugListe);
 
                     // Textfelder wieder leer machen fur das nachste Auto hinzufugen
+                    // Felder leeren
                     txtHersteller.clear();
                     txtModell.clear();
                     txtKennzeichen.clear();
+                    txtBaujahr.clear();
+                    txtKilometerstand.clear();
+                    txtTageskosten.clear();
+                    txtKaution.clear();
+                    txtKraftstoffArt.clear();
+                    txtTankfuellung.clear(); // Auch dieses leeren
+
+                    // Die Checkbox können wir ignorieren, da der Status ja eh in der DB auf 1 gesetzt wurde.
+
                 } else {
+
                     System.out.println("Fahler beim Speichern in der Datenbank.");
+
                 }
 
             }
+
+
+            ;
             @FXML
             public void onBearbeitenKlicken(){
+                // 1. Das markierte Auto aus der Tabelle holen
+                Fahrzeug ausgewaehltesAuto = tabelleFahrzeuge.getSelectionModel().getSelectedItem();
+                // 2. Prüfen, ob wirklich ein Auto ausgewählt wurde
+                if (ausgewaehltesAuto != null) {
+                    // Wir holen uns die ID dieses Autos, denn die brauchen wir für die Datenbank!
+                    int zieleBearbeiten = ausgewaehltesAuto.getFahrzeug_id();
+                }
+
 
             }
 
             @FXML
             public void onLoeschenKlicken(){
+                // 1. Das markierte Auto aus der Tabelle holen
+                Fahrzeug ausgewaehltesAuto = tabelleFahrzeuge.getSelectionModel().getSelectedItem();
+                // 2. Prüfen, ob wirklich ein Auto ausgewählt wurde
+                if (ausgewaehltesAuto != null) {
+                    // Wir holen uns die ID dieses Autos, denn die brauchen wir für die Datenbank!
+                    int zieleLoeschen = ausgewaehltesAuto.getFahrzeug_id();
+
+                    // 1. Das Auto in der Datenbank löschen
+                    boolean erfolg = FahrzeugDAO.autoLoeschen(zieleLoeschen);
+
+                    if (erfolg) {
+                        System.out.println("Das Auto ist erfolgreich gelöscht!");
+
+                        // Tabelle neue laden
+                        fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
+                        tabelleFahrzeuge.setItems(fahrzeugListe);
+
+                        // Textfelder wieder leer machen fur das nachste Auto hinzufugen
+                        txtHersteller.clear();
+                        txtModell.clear();
+                        txtKennzeichen.clear();
+                        txtHersteller.clear();
+                        txtModell.clear();
+                        txtKennzeichen.clear();
+                        txtBaujahr.clear();
+                        txtKilometerstand.clear();
+                        txtTageskosten.clear();
+                        txtKaution.clear();
+                        txtKraftstoffArt.clear();
+                    }
+                } else {
+                    System.out.println("Bitte wähle zuerst ein Auto aus der Tabelle aus!");
+                }
 
             }
 

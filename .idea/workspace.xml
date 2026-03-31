@@ -4,26 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8f87199-a6c2-43bb-9816-d13e3a11bcbc" name="Changes" comment="feat: Knöpfe, Hitzufugen und Abbrechen">
+    <list default="true" id="d8f87199-a6c2-43bb-9816-d13e3a11bcbc" name="Changes" comment="feat: Update neu Struktur">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeuView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_03_2026_14_18_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_03_2026_14_18__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DAO/FahrzeugDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/FahrzeugDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveCheaperApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveCheaperApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/Fahrzeug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Fahrzeug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/KraftstoffArt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/KraftstoffArt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/LKW.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/LKW.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/Motorrad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Motorrad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Fahrzeuge/PKW.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/PKW.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/Kunden.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/MitarbeiterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/MitarbeiterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Firmenkunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Firmenkunde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Kunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Kunde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Mitarbeiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Mitarbeiter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/kunde/Privatkunde.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/MitarbeiterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/FahrzeugController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/FahrzeugDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/FahrzeugDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/Mitarbeiter-wiev.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeugWiev.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeugWiev.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,14 +26,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="38" />
+    <option name="cachedIndexableFilesCount" value="34" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -207,7 +202,10 @@
       <workItem from="1774537612809" duration="1594000" />
       <workItem from="1774551691415" duration="4770000" />
       <workItem from="1774608194331" duration="582000" />
-      <workItem from="1774615548622" duration="2634000" />
+      <workItem from="1774615548622" duration="4167000" />
+      <workItem from="1774633358431" duration="2355000" />
+      <workItem from="1774863039906" duration="6039000" />
+      <workItem from="1774873104367" duration="22621000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -257,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774363352397</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: Update neu Struktur">
+      <option name="closed" value="true" />
+      <created>1774619295340</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1774619295340</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,6 +285,7 @@
     <MESSAGE value="feat: Datenbak verknupfen" />
     <MESSAGE value="feat: Test DB erstellen und verbindug testen" />
     <MESSAGE value="feat: Knöpfe, Hitzufugen und Abbrechen" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Knöpfe, Hitzufugen und Abbrechen" />
+    <MESSAGE value="feat: Update neu Struktur" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Update neu Struktur" />
   </component>
 </project>
