@@ -17,7 +17,7 @@ public class DriveCheaperApp extends Application {
     //Vererbung und überschreiben notwendig
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FahrzeuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FahrzeugView.fxml"));
 
         //Laden der FXML-Datei, zuerst Erstellen eines Objekt der Klasse DriveController , dann initialize()
         Parent root = fxmlLoader.load();
