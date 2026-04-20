@@ -121,7 +121,7 @@
                 <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="65.0" spacing="15.0">
                     <children>
                         <Button fx:id="btnNeue" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHizufugenKlicken" text="Hinzufügen" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Aktualisieren" />
+                  <Button fx:id="btnAktualisieren" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAktualisierenKlicken" text="Aktualisieren" />
                         <Button fx:id="btnBearbeiten" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBearbeitenKlicken" text="Bearbeiten" />
                         <Button fx:id="btnLoeschen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoeschenKlicken" prefHeight="26.0" prefWidth="74.0" text="Löschen" />
                         <Button fx:id="btnAbbrechen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAbbrechenKlicken" text="Abbrechen" />

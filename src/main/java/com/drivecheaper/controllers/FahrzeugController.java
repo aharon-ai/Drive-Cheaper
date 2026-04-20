@@ -268,5 +268,13 @@ public class FahrzeugController {
 
             }
 
+            @FXML
+            public void onAktualisierenKlicken(){
+
+                tabelleFahrzeuge.setItems(FahrzeugDAO.ladeAlleFahrzeuge());
+                System.out.println("Die Tabbelle ist erfolgreich Aktualisiert!");
+
+            }
+
     }
 
