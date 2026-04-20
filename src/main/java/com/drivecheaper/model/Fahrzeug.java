@@ -35,9 +35,7 @@ public abstract class Fahrzeug {
         this.kennzeichen = kennzeichen;
     }
 
-    public Fahrzeug() {
 
-    }
 
     public abstract String getDetails();
 

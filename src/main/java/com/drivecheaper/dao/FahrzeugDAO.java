@@ -5,7 +5,6 @@ import com.drivecheaper.model.PKW;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import io.github.cdimascio.dotenv.Dotenv;
-import javafx.scene.control.CheckBox;
 
 import java.sql.*;
 
@@ -104,6 +103,42 @@ public class FahrzeugDAO {
             }
 
             return fahrzeugListe;
+    }
+    public static boolean autoBearbeiten(Fahrzeug geaendertesAuto) {
+        // 1. Der SQL-Befehl mit Lücken (?) für jedes Feld und dem WHERE ganz am Ende
+        String updateQuery = """
+            UPDATE fahrzeug 
+            SET hersteller = ?, modell = ?, kennzeichen = ?, baujahr = ?, 
+                kilometerstand = ?, tageskosten = ?, status = ?, 
+                tankfuellung = ?, kaution = ?, kraftstoffArt = ? 
+            WHERE fahrzeug_id = ?""";
+
+        try (Connection connection = DriverManager.getConnection(connectionURL, user, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+
+            // 2. Die Lücken der Reihe nach mit den Daten aus dem Objekt füllen
+            preparedStatement.setString(1, geaendertesAuto.getHersteller());
+            preparedStatement.setString(2, geaendertesAuto.getModell());
+            preparedStatement.setString(3, geaendertesAuto.getKennzeichen());
+            preparedStatement.setInt(4, geaendertesAuto.getBaujahr());
+            preparedStatement.setDouble(5, geaendertesAuto.getKilometerstand());
+            preparedStatement.setDouble(6, geaendertesAuto.getTageskosten());
+            preparedStatement.setBoolean(7, geaendertesAuto.isStatus());
+            preparedStatement.setDouble(8, geaendertesAuto.getTankfuellung());
+            preparedStatement.setDouble(9, geaendertesAuto.getKaution());
+            preparedStatement.setString(10, String.valueOf(geaendertesAuto.getKraftstoffArt()));
+
+            // Das 11. Fragezeichen gehört zur WHERE-Bedingung (welches Auto soll geändert werden?)
+            preparedStatement.setInt(11, geaendertesAuto.getFahrzeug_id());
+
+            // 3. Befehl ausführen und prüfen, ob Zeilen geändert wurden
+            int betroffeneZeilen = preparedStatement.executeUpdate();
+            return betroffeneZeilen > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

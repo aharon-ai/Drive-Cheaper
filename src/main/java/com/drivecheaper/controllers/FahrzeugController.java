@@ -2,6 +2,7 @@ package com.drivecheaper.controllers;
 
 import com.drivecheaper.dao.FahrzeugDAO;
 import com.drivecheaper.model.Fahrzeug;
+import com.drivecheaper.model.KraftstoffArt;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +29,7 @@ public class FahrzeugController {
     @FXML
     private TableColumn<Fahrzeug, String> colKennzeichen;
 
+
     @FXML
     private TextField txtHersteller;
     @FXML
@@ -47,7 +49,7 @@ public class FahrzeugController {
     @FXML
     private TextField txtFahrzeug_id;
     @FXML
-    private TextField txtKraftstoffArt;
+    private ComboBox<KraftstoffArt> cbKraftstoffArt;
     @FXML
     private TextField txtTankfuellung;
 
@@ -63,6 +65,7 @@ public class FahrzeugController {
                 colHersteller.setCellValueFactory(new PropertyValueFactory<>("hersteller"));
                 colModell.setCellValueFactory(new PropertyValueFactory<>("modell"));
                 colKennzeichen.setCellValueFactory(new PropertyValueFactory<>("kennzeichen"));
+                cbKraftstoffArt.getItems().addAll(KraftstoffArt.values());
 
                 // 1. Liste fullen
                 fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
@@ -96,19 +99,40 @@ public class FahrzeugController {
                     };
                 });
 
+                // Zuhörer für Klicks in der Tabelle hinzufügen
+                tabelleFahrzeuge.getSelectionModel().selectedItemProperty().addListener((obs, altesAuto, neuesAuto) -> {
+                    if (neuesAuto != null) {
+                        // Textfelder mit den Daten des angeklickten Autos füllen
+                        txtHersteller.setText(neuesAuto.getHersteller());
+                        txtModell.setText(neuesAuto.getModell());
+                        txtKennzeichen.setText(neuesAuto.getKennzeichen());
+                        txtBaujahr.setText(String.valueOf(neuesAuto.getBaujahr()));
+                        txtKilometerstand.setText(String.valueOf(neuesAuto.getKilometerstand()));
+                        isStatus.setSelected(neuesAuto.isStatus());
+                        txtTageskosten.setText(String.valueOf(neuesAuto.getTageskosten()));
+                        txtTankfuellung.setText(String.valueOf(neuesAuto.getTankfuellung()));
+                        txtKaution.setText(String.valueOf(neuesAuto.getKaution()));
+                        cbKraftstoffArt.getSelectionModel().select(neuesAuto.getKraftstoffArt());
+
+                    }
+                });
+
             }
             @FXML
             public void onHizufugenKlicken(){
-                // 1. Texte aus den Eingabefaldern auslesen
-                String eingabeHersteller = txtHersteller.getText();
-                String eingabeModell = txtModell.getText();
-                String eingabeKennzeichen = txtKennzeichen.getText();
-                String eingabeTageskosten = txtTageskosten.getText();
-                String eingabeKaution = txtKaution.getText();
-                String eingabeBaujahr = txtBaujahr.getText();
-                String eingabeKilometerstand = txtKilometerstand.getText();
-                String eingabeKraftstoffArt = txtKraftstoffArt.getText();
-                String eingabeTankfuellung = txtTankfuellung.getText();
+                    // 1. Texte aus den Eingabefaldern auslesen
+                    String eingabeHersteller = txtHersteller.getText();
+                    String eingabeModell = txtModell.getText();
+                    String eingabeKennzeichen = txtKennzeichen.getText();
+                    String eingabeBaujahr = txtBaujahr.getText();
+                    String eingabeKilometerstand = txtKilometerstand.getText();
+                    String eingabeTageskosten = txtTageskosten.getText();
+                    String eingabeTankfuellung = txtTankfuellung.getText();
+                    String eingabeKaution = txtKaution.getText();
+
+                    // 1. Text holen
+                    String eingabeKraftstoffArt = String.valueOf(cbKraftstoffArt.getValue());
+                    eingabeKraftstoffArt = eingabeKraftstoffArt.substring(0, 1).toUpperCase() + eingabeKraftstoffArt.substring(1).toLowerCase();
 
                 // WICHTIG: Hier wandeln wir das UI-Element in einen Datenwert (boolean) um!
                 boolean eingabeStatus = isStatus.isSelected();
@@ -143,7 +167,7 @@ public class FahrzeugController {
                     txtKilometerstand.clear();
                     txtTageskosten.clear();
                     txtKaution.clear();
-                    txtKraftstoffArt.clear();
+                    cbKraftstoffArt.getSelectionModel().clearSelection();
                     txtTankfuellung.clear(); // Auch dieses leeren
 
                     // Die Checkbox können wir ignorieren, da der Status ja eh in der DB auf 1 gesetzt wurde.
@@ -159,15 +183,42 @@ public class FahrzeugController {
 
             ;
             @FXML
-            public void onBearbeitenKlicken(){
+            public void onBearbeitenKlicken() {
                 // 1. Das markierte Auto aus der Tabelle holen
-                Fahrzeug ausgewaehltesAuto = tabelleFahrzeuge.getSelectionModel().getSelectedItem();
+                Fahrzeug geaendertesAuto = tabelleFahrzeuge.getSelectionModel().getSelectedItem();
                 // 2. Prüfen, ob wirklich ein Auto ausgewählt wurde
-                if (ausgewaehltesAuto != null) {
+                if (geaendertesAuto != null) {
                     // Wir holen uns die ID dieses Autos, denn die brauchen wir für die Datenbank!
-                    int zieleBearbeiten = ausgewaehltesAuto.getFahrzeug_id();
-                }
 
+                    int zieleBearbeiten = geaendertesAuto.getFahrzeug_id();
+
+                        System.out.println("Das Auto ist erfolgreich bearbeitet!");
+
+                        geaendertesAuto.setHersteller(txtHersteller.getText());
+                        geaendertesAuto.setModell(txtModell.getText());
+                        geaendertesAuto.setKennzeichen(txtKennzeichen.getText());
+                        geaendertesAuto.setStatus(isStatus.isSelected());
+
+                        // Bei Zahlen wandeln wir den Text direkt um:
+                        geaendertesAuto.setBaujahr(Integer.parseInt(txtBaujahr.getText()));
+                        geaendertesAuto.setKilometerstand(Double.parseDouble(txtKilometerstand.getText()));
+                        geaendertesAuto.setTageskosten(Double.parseDouble(txtTageskosten.getText()));
+                        geaendertesAuto.setTankfuellung(Double.parseDouble(txtTankfuellung.getText()));
+                        geaendertesAuto.setKaution(Double.parseDouble(txtKaution.getText()));
+                        geaendertesAuto.setKraftstoffArt(cbKraftstoffArt.getValue());
+
+                        // 2. Das fertige Paket an die Datenbank schicken!
+                        boolean erfolg = FahrzeugDAO.autoBearbeiten(geaendertesAuto);
+
+                    if (erfolg) {
+                        System.out.println("Das Auto ist erfolgreich bearbeitet!");
+                        // Tabelle neue laden
+                        fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
+                        tabelleFahrzeuge.setItems(fahrzeugListe);
+                    }
+                } else {
+                    System.out.println("Bitte wähle zuerst ein Auto aus der Tabelle aus!");
+                }
 
             }
 
@@ -194,14 +245,12 @@ public class FahrzeugController {
                         txtHersteller.clear();
                         txtModell.clear();
                         txtKennzeichen.clear();
-                        txtHersteller.clear();
-                        txtModell.clear();
-                        txtKennzeichen.clear();
                         txtBaujahr.clear();
                         txtKilometerstand.clear();
                         txtTageskosten.clear();
                         txtKaution.clear();
-                        txtKraftstoffArt.clear();
+                        cbKraftstoffArt.getSelectionModel().clearSelection();
+
                     }
                 } else {
                     System.out.println("Bitte wähle zuerst ein Auto aus der Tabelle aus!");
