@@ -130,9 +130,11 @@ public class FahrzeugController {
                     String eingabeTankfuellung = txtTankfuellung.getText();
                     String eingabeKaution = txtKaution.getText();
 
-                    // 1. Text holen
-                    String eingabeKraftstoffArt = String.valueOf(cbKraftstoffArt.getValue());
-                    eingabeKraftstoffArt = eingabeKraftstoffArt.substring(0, 1).toUpperCase() + eingabeKraftstoffArt.substring(1).toLowerCase();
+                // 1. Text aus dem Dropdown holen (Liefert das Enum komplett großgeschrieben, z. B. "BENZIN")
+                String eingabeKraftstoffArt = String.valueOf(cbKraftstoffArt.getValue());
+                // 2. Format für die Datenbank anpassen: Aus "BENZIN" wird "Benzin".
+                // Grund: Die MySQL-Spalte "kraftstoffArt" (ENUM) akzeptiert nur Wörter mit einem großen Anfangsbuchstaben.
+                eingabeKraftstoffArt = eingabeKraftstoffArt.substring(0, 1).toUpperCase() + eingabeKraftstoffArt.substring(1).toLowerCase();
 
                 // WICHTIG: Hier wandeln wir das UI-Element in einen Datenwert (boolean) um!
                 boolean eingabeStatus = isStatus.isSelected();

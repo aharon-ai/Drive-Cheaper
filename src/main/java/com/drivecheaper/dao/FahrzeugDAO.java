@@ -1,6 +1,7 @@
 package com.drivecheaper.dao;
 
 import com.drivecheaper.model.Fahrzeug;
+import com.drivecheaper.model.KraftstoffArt;
 import com.drivecheaper.model.PKW;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -89,13 +90,32 @@ public class FahrzeugDAO {
                     String hersteller = rs.getString("hersteller");
                     String modell = rs.getString("modell");
                     String kennzeichen = rs.getString("kennzeichen");
+                    int baujahr = rs.getInt("baujahr");
+                    double kilometerstand = rs.getDouble("kilometerstand");
+                    double tagesKosten = rs.getDouble("tagesKosten");
+                    double tankfuellung = rs.getDouble("tankfuellung");
+                    double kaution = rs.getDouble("kaution");
+                    String dbKraftstoff = rs.getString("kraftstoffArt"); // z.B. "Benzin"
 
                     // 2. Daraus ein neues Fahrzeug bauen (passe das an deinen echten Fahrzeug-Konstruktor an!)
                     Fahrzeug neuesAuto = new PKW(fahrzeug_id, status, hersteller, modell, kennzeichen);
 
+
+                    neuesAuto.setBaujahr(baujahr);
+                    neuesAuto.setKilometerstand(kilometerstand);
+                    neuesAuto.setTageskosten(tagesKosten);
+                    neuesAuto.setTankfuellung(tankfuellung);
+                    neuesAuto.setKaution(kaution);
+
+                    // Kraftstoff zurück in ein Enum verwandeln (Aus "Benzin" wird wieder "BENZIN")
+                    if (dbKraftstoff != null) {
+                        neuesAuto.setKraftstoffArt(KraftstoffArt.valueOf(dbKraftstoff.toUpperCase()));
+
+                    }
                     // 3. Das fertige Auto in unsere Liste packen
                     fahrzeugListe.add(neuesAuto);
                 }
+
 
             } catch (SQLException e) {
                 System.out.println("DA IST DER FEHLER: " + e.getMessage());

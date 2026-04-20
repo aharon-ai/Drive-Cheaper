@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/FahrzeugController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/FahrzeugController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/FahrzeugDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/FahrzeugDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Fahrzeug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Fahrzeug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeugView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeugView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +200,7 @@
       <workItem from="1775122867141" duration="2358000" />
       <workItem from="1775463928458" duration="2649000" />
       <workItem from="1776408203583" duration="20555000" />
-      <workItem from="1776667112846" duration="5197000" />
+      <workItem from="1776667112846" duration="7221000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -276,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775465485932</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: Update: Neue Klassen und Views">
+      <option name="closed" value="true" />
+      <created>1776672902812</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1776672902813</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
