@@ -1,22 +1,30 @@
 package com.drivecheaper.model;
 
+import java.time.LocalDate;
+
 public abstract class Kunde {
     private int kunden_id;
+    String vorname;
+    String nachname;
+    LocalDate geburtsDatum;
     private String adresse;
-    private int plz;
-    private String ort;
-    private String email;
+    String hausnummer;
+   private String email;
     private String telefonnummer;
     private boolean gesperrt;
+    int ort_id;
 
-    public Kunde(int kunden_id, String adresse, int plz, String ort, String email, String telefonnummer, boolean gesperrt) {
+    public Kunde(int kunden_id, String vorname, String nachname, LocalDate geburtsDatum, String adresse, String hausnummer, String email, String telefonnummer, boolean gesperrt, int ort_id) {
         this.kunden_id = kunden_id;
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.geburtsDatum = geburtsDatum;
         this.adresse = adresse;
-        this.plz = plz;
-        this.ort = ort;
+        this.hausnummer = hausnummer;
         this.email = email;
         this.telefonnummer = telefonnummer;
         this.gesperrt = gesperrt;
+        this.ort_id = ort_id;
     }
 
     public int getKunden_id() {
@@ -27,6 +35,30 @@ public abstract class Kunde {
         this.kunden_id = kunden_id;
     }
 
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
+
+    public LocalDate getGeburtsDatum() {
+        return geburtsDatum;
+    }
+
+    public void setGeburtsDatum(LocalDate geburtsDatum) {
+        this.geburtsDatum = geburtsDatum;
+    }
+
     public String getAdresse() {
         return adresse;
     }
@@ -35,20 +67,12 @@ public abstract class Kunde {
         this.adresse = adresse;
     }
 
-    public int getPlz() {
-        return plz;
+    public String getHausnummer() {
+        return hausnummer;
     }
 
-    public void setPlz(int plz) {
-        this.plz = plz;
-    }
-
-    public String getOrt() {
-        return ort;
-    }
-
-    public void setOrt(String ort) {
-        this.ort = ort;
+    public void setHausnummer(String hausnummer) {
+        this.hausnummer = hausnummer;
     }
 
     public String getEmail() {
@@ -74,4 +98,13 @@ public abstract class Kunde {
     public void setGesperrt(boolean gesperrt) {
         this.gesperrt = gesperrt;
     }
+
+    public int getOrt_id() {
+        return ort_id;
+    }
+
+    public void setOrt_id(int ort_id) {
+        this.ort_id = ort_id;
+    }
 }
+
