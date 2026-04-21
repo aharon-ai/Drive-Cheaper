@@ -6,12 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="d8f87199-a6c2-43bb-9816-d13e3a11bcbc" name="Changes" comment="feat: Update: Neue Klassen und Views">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveCheaperApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/DriveCheaperApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/FahrzeugController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/FahrzeugController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/KundeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/KundeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/KundenDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/KundenDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Firmenkunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Firmenkunde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Kunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/model/Kunde.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/MietvertragController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/MietvertragController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/MitarbeiterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/controllers/MitarbeiterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/HomeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/HomeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/KundenDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/KundeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/MietvertragDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/MietvertragDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/MitarbeiterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/drivecheaper/dao/MitarbeiterDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeugView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/FahrzeugView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/HomeView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/HomeView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/KundeView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/KundeView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/MietvertragView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/MietvertragView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/MitarbeiterView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/drivecheaper/MitarbeiterView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +29,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="44" />
+    <option name="cachedIndexableFilesCount" value="51" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -204,7 +214,9 @@
       <workItem from="1775122867141" duration="2358000" />
       <workItem from="1775463928458" duration="2649000" />
       <workItem from="1776408203583" duration="20555000" />
-      <workItem from="1776667112846" duration="13761000" />
+      <workItem from="1776667112846" duration="29931000" />
+      <workItem from="1776708470720" duration="4986000" />
+      <workItem from="1776753553189" duration="2461000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -302,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776675946311</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: Update: Neue Klassen und Views">
+      <option name="closed" value="true" />
+      <created>1776687830849</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1776687830849</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

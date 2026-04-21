@@ -16,4 +16,7 @@ module com.drivecheaper.drivecheaper {
     opens com.drivecheaper.model to javafx.fxml;
     exports com.drivecheaper.controllers;
     opens com.drivecheaper.controllers to javafx.fxml;
+
+    exports com.drivecheaper.dao;
+    opens com.drivecheaper.dao to javafx.fxml, javafx.base;
 }
