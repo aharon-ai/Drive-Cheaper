@@ -9,30 +9,76 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 
 public class FahrzeugController {
 
-    @FXML private TableView<Fahrzeug> tabelleFahrzeuge;
-    @FXML private TableColumn<Fahrzeug, Integer> colId;
-    @FXML private TableColumn<Fahrzeug, Boolean> colStatus;
-    @FXML private TableColumn<Fahrzeug, String> colHersteller;
-    @FXML private TableColumn<Fahrzeug, String> colModell;
-    @FXML private TableColumn<Fahrzeug, String> colKennzeichen;
+    @FXML
+    private TableView<Fahrzeug> tabelleFahrzeuge;
+    @FXML
+    private TableColumn<Fahrzeug, Integer> colId;
+    @FXML
+    private TableColumn<Fahrzeug, Boolean> colStatus;
+    @FXML
+    private TableColumn<Fahrzeug, String> colHersteller;
+    @FXML
+    private TableColumn<Fahrzeug, String> colModell;
+    @FXML
+    private TableColumn<Fahrzeug, String> colKennzeichen;
 
-    @FXML private TextField txtHersteller;
-    @FXML private TextField txtModell;
-    @FXML private TextField txtKennzeichen;
-    @FXML private TextField txtBaujahr;
-    @FXML private TextField txtKilometerstand;
-    @FXML private TextField txtTageskosten;
-    @FXML private CheckBox isStatus;
-    @FXML private TextField txtKaution;
-    @FXML private TextField txtFahrzeug_id;
-    @FXML private ComboBox<KraftstoffArt> cbKraftstoffArt;
-    @FXML private TextField txtTankfuellung;
+    @FXML
+    private TextField txtHersteller;
+    @FXML
+    private TextField txtModell;
+    @FXML
+    private TextField txtKennzeichen;
+    @FXML
+    private TextField txtBaujahr;
+    @FXML
+    private TextField txtKilometerstand;
+    @FXML
+    private TextField txtTageskosten;
+    @FXML
+    private CheckBox isStatus;
+    @FXML
+    private TextField txtKaution;
+    @FXML
+    private TextField txtFahrzeug_id;
+    @FXML
+    private ComboBox<KraftstoffArt> cbKraftstoffArt;
+    @FXML
+    private TextField txtTankfuellung;
 
-    ObservableList<Fahrzeug> fahrzeugListe = FXCollections.observableArrayList();
+    // Das Suchfeld
+    @FXML
+    private TextField txtSuche;
+
+    @FXML
+    public void onHomeClick(ActionEvent event) {
+
+        ViewNavigator.navigate(event, "HomeView.fxml");
+    }
+    @FXML
+    public void onFahrzeugeClick(ActionEvent event) {
+
+        ViewNavigator.navigate(event, "FahrzeugView.fxml");
+    }
+    @FXML
+    public void onMitarbeiterClick(ActionEvent event) {
+
+        ViewNavigator.navigate(event, "MitarbeiterView.fxml");
+    }
+    @FXML
+    public void onKundeClick(ActionEvent event) {
+
+        ViewNavigator.navigate(event, "KundeView.fxml");
+    }
+    @FXML
+    public void onMietvertragClick(ActionEvent event) {
+        ViewNavigator.navigate(event, "MietvertragView.fxml");
+    }
+
+    // Wir brauchen diese Liste als "Original-Speicher" für die Suche
+    private ObservableList<Fahrzeug> fahrzeugListe = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -44,12 +90,6 @@ public class FahrzeugController {
         colModell.setCellValueFactory(new PropertyValueFactory<>("modell"));
         colKennzeichen.setCellValueFactory(new PropertyValueFactory<>("kennzeichen"));
         cbKraftstoffArt.getItems().addAll(KraftstoffArt.values());
-
-        // 1. Liste füllen
-        fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
-
-        // 2. Liste an die Tabelle binden
-        tabelleFahrzeuge.setItems(fahrzeugListe);
 
         // Boolean für die Tabelle definieren als Verfügbar oder nicht verfügbar
         colStatus.setCellFactory(column -> {
@@ -76,7 +116,6 @@ public class FahrzeugController {
         // Zuhörer für Klicks in der Tabelle hinzufügen
         tabelleFahrzeuge.getSelectionModel().selectedItemProperty().addListener((obs, altesAuto, neuesAuto) -> {
             if (neuesAuto != null) {
-                // Textfelder mit den Daten des angeklickten Autos füllen
                 txtHersteller.setText(neuesAuto.getHersteller());
                 txtModell.setText(neuesAuto.getModell());
                 txtKennzeichen.setText(neuesAuto.getKennzeichen());
@@ -89,12 +128,56 @@ public class FahrzeugController {
                 cbKraftstoffArt.getSelectionModel().select(neuesAuto.getKraftstoffArt());
             }
         });
+
+        // Damit das Formular geleert wird, wenn man ins "Leere" klickt
+        tabelleFahrzeuge.setOnMouseClicked(event -> {
+            if (tabelleFahrzeuge.getSelectionModel().getSelectedItem() == null) {
+                felderLeeren();
+            }
+        });
+
+        ladeFahrzeuge();
+    }
+
+    // --- NEUE HILFSMETHODE FÜR DIE SUCHE UND DAS LADEN ---
+    private void ladeFahrzeuge() {
+        fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
+
+        // Die Daten in eine "gefilterte Liste" packen
+        javafx.collections.transformation.FilteredList<Fahrzeug> filteredData =
+                new javafx.collections.transformation.FilteredList<>(fahrzeugListe, b -> true);
+
+        // Zuhören, was der Nutzer in das Suchfeld tippt
+        if (txtSuche != null) {
+            txtSuche.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(auto -> {
+                    // Wenn das Suchfeld leer ist, zeige alle Autos
+                    if (newValue == null || newValue.isBlank()) return true;
+
+                    String suchWort = newValue.toLowerCase();
+
+                    // Suchen nach Hersteller, Modell oder Kennzeichen
+                    if (auto.getHersteller() != null && auto.getHersteller().toLowerCase().contains(suchWort)) return true;
+                    if (auto.getModell() != null && auto.getModell().toLowerCase().contains(suchWort)) return true;
+                    if (auto.getKennzeichen() != null && auto.getKennzeichen().toLowerCase().contains(suchWort)) return true;
+
+                    return false; // Nichts gefunden -> Ausblenden!
+                });
+            });
+        }
+
+        // Sortierung beibehalten
+        javafx.collections.transformation.SortedList<Fahrzeug> sortedData =
+                new javafx.collections.transformation.SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tabelleFahrzeuge.comparatorProperty());
+
+        // Die gefilterte Liste in die Tabelle packen
+        tabelleFahrzeuge.setItems(sortedData);
     }
 
     @FXML
     public void onHizufugenKlicken() {
         try {
-            // 1. Texte aus den Eingabefeldern auslesen
             String eingabeHersteller = txtHersteller.getText();
             String eingabeModell = txtModell.getText();
             String eingabeKennzeichen = txtKennzeichen.getText();
@@ -104,32 +187,23 @@ public class FahrzeugController {
             String eingabeTankfuellung = txtTankfuellung.getText();
             String eingabeKaution = txtKaution.getText();
 
-            // Kleiner Sicherheits-Check: Sind die Felder leer?
             if (eingabeHersteller.isEmpty() || eingabeModell.isEmpty() || eingabeKennzeichen.isEmpty() || cbKraftstoffArt.getValue() == null) {
-                zeigeMeldung(Alert.AlertType.WARNING, "Hinweis", "Achtung: Bitte fülle alle wichtigen Felder (Hersteller, Modell, Kennzeichen, Kraftstoffart) aus!");
-                return; // Bricht die Methode ab
+                zeigeMeldung(Alert.AlertType.WARNING, "Hinweis", "Achtung: Bitte fülle alle wichtigen Felder aus!");
+                return;
             }
 
-            // 1. Text aus dem Dropdown holen
             String eingabeKraftstoffArt = String.valueOf(cbKraftstoffArt.getValue());
             eingabeKraftstoffArt = eingabeKraftstoffArt.substring(0, 1).toUpperCase() + eingabeKraftstoffArt.substring(1).toLowerCase();
 
-            // 2. Die Daten an die Datenbank schicken
             boolean erfolg = FahrzeugDAO.autoHinzufuegen(
                     eingabeHersteller, eingabeModell, eingabeKennzeichen,
                     eingabeBaujahr, eingabeKilometerstand, eingabeTageskosten,
                     eingabeTankfuellung, eingabeKaution, eingabeKraftstoffArt
             );
 
-            // 3. Wenn Speichern erfolgreich: Tabelle updaten und Felder leeren
             if (erfolg) {
                 zeigeMeldung(Alert.AlertType.INFORMATION, "Erfolg", "Das Fahrzeug wurde erfolgreich gespeichert!");
-
-                // Tabelle neu laden
-                fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
-                tabelleFahrzeuge.setItems(fahrzeugListe);
-
-                // Textfelder leeren
+                ladeFahrzeuge();
                 felderLeeren();
             } else {
                 zeigeMeldung(Alert.AlertType.ERROR, "Fehler", "Fehler beim Speichern in der Datenbank.");
@@ -142,18 +216,14 @@ public class FahrzeugController {
     @FXML
     public void onBearbeitenKlicken() {
         try {
-            // 1. Das markierte Auto aus der Tabelle holen
             Fahrzeug geaendertesAuto = tabelleFahrzeuge.getSelectionModel().getSelectedItem();
 
-            // 2. Prüfen, ob wirklich ein Auto ausgewählt wurde
             if (geaendertesAuto != null) {
-
                 geaendertesAuto.setHersteller(txtHersteller.getText());
                 geaendertesAuto.setModell(txtModell.getText());
                 geaendertesAuto.setKennzeichen(txtKennzeichen.getText());
                 geaendertesAuto.setStatus(isStatus.isSelected());
 
-                // Bei Zahlen wandeln wir den Text direkt um:
                 geaendertesAuto.setBaujahr(Integer.parseInt(txtBaujahr.getText()));
                 geaendertesAuto.setKilometerstand(Double.parseDouble(txtKilometerstand.getText()));
                 geaendertesAuto.setTageskosten(Double.parseDouble(txtTageskosten.getText()));
@@ -161,14 +231,12 @@ public class FahrzeugController {
                 geaendertesAuto.setKaution(Double.parseDouble(txtKaution.getText()));
                 geaendertesAuto.setKraftstoffArt(cbKraftstoffArt.getValue());
 
-                // 2. Das fertige Paket an die Datenbank schicken!
                 boolean erfolg = FahrzeugDAO.autoBearbeiten(geaendertesAuto);
 
                 if (erfolg) {
                     zeigeMeldung(Alert.AlertType.INFORMATION, "Erfolg", "Das Fahrzeug wurde erfolgreich bearbeitet!");
-                    // Tabelle neu laden
-                    fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
-                    tabelleFahrzeuge.setItems(fahrzeugListe);
+                    ladeFahrzeuge();
+                    felderLeeren();
                 } else {
                     zeigeMeldung(Alert.AlertType.ERROR, "Fehler", "Fehler beim Aktualisieren in der Datenbank.");
                 }
@@ -182,24 +250,15 @@ public class FahrzeugController {
 
     @FXML
     public void onLoeschenKlicken() {
-        // 1. Das markierte Auto aus der Tabelle holen
         Fahrzeug ausgewaehltesAuto = tabelleFahrzeuge.getSelectionModel().getSelectedItem();
 
-        // 2. Prüfen, ob wirklich ein Auto ausgewählt wurde
         if (ausgewaehltesAuto != null) {
             int zieleLoeschen = ausgewaehltesAuto.getFahrzeug_id();
-
-            // 1. Das Auto in der Datenbank löschen
             boolean erfolg = FahrzeugDAO.autoLoeschen(zieleLoeschen);
 
             if (erfolg) {
                 zeigeMeldung(Alert.AlertType.INFORMATION, "Erfolg", "Das Fahrzeug wurde erfolgreich gelöscht!");
-
-                // Tabelle neu laden
-                fahrzeugListe = FahrzeugDAO.ladeAlleFahrzeuge();
-                tabelleFahrzeuge.setItems(fahrzeugListe);
-
-                // Textfelder leeren
+                ladeFahrzeuge();
                 felderLeeren();
             } else {
                 zeigeMeldung(Alert.AlertType.ERROR, "Fehler", "Das Fahrzeug konnte nicht gelöscht werden (hat es evtl. noch Mietverträge?).");
@@ -212,14 +271,15 @@ public class FahrzeugController {
     @FXML
     public void onAbbrechenKlicken() {
         felderLeeren();
+        tabelleFahrzeuge.getSelectionModel().clearSelection();
     }
 
     @FXML
     public void onAktualisierenKlicken() {
-        tabelleFahrzeuge.setItems(FahrzeugDAO.ladeAlleFahrzeuge());
+        ladeFahrzeuge();
+        onAbbrechenKlicken();
     }
 
-    // Hilfsmethode, damit wir nicht immer alles abtippen müssen
     private void felderLeeren() {
         txtHersteller.clear();
         txtModell.clear();
@@ -233,37 +293,11 @@ public class FahrzeugController {
         isStatus.setSelected(false);
     }
 
-    // Die neue Methode für die Pop-Up-Meldungen
     private void zeigeMeldung(Alert.AlertType alertType, String titel, String nachricht) {
         Alert alert = new Alert(alertType);
         alert.setTitle(titel);
         alert.setHeaderText(null);
         alert.setContentText(nachricht);
         alert.showAndWait();
-    }
-
-    @FXML
-    public void onHomeClick(ActionEvent event) {
-        ViewNavigator.navigate(event, "HomeView.fxml");
-    }
-
-    @FXML
-    public void onFahrzeugeClick(ActionEvent event) {
-        ViewNavigator.navigate(event, "FahrzeugView.fxml");
-    }
-
-    @FXML
-    public void onMitarbeiterClick(ActionEvent event) {
-        ViewNavigator.navigate(event, "MitarbeiterView.fxml");
-    }
-
-    @FXML
-    public void onKundeClick(ActionEvent event) {
-        ViewNavigator.navigate(event, "KundeView.fxml");
-    }
-
-    @FXML
-    public void onMietvertragClick(ActionEvent event) {
-        ViewNavigator.navigate(event, "MietvertragView.fxml");
     }
 }

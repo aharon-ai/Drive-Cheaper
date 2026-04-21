@@ -14,22 +14,38 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 public class HomeController {
-    @FXML private Label lblGesamtFahrzeuge;
-    @FXML private Label lblVerfuegbar;
-    @FXML private Label lblKunden;
-    @FXML private Label lblFirmenkunden;
-    @FXML private Label lblMitarbeiter;
-    @FXML private Label lblMietvertraege;
-    @FXML private Label lblUmsatz;
+    @FXML
+    private Label lblGesamtFahrzeuge;
+    @FXML
+    private Label lblVerfuegbar;
+    @FXML
+    private Label lblKunden;
+    @FXML
+    private Label lblFirmenkunden;
+    @FXML
+    private Label lblMitarbeiter;
+    @FXML
+    private Label lblMietvertraege;
+    @FXML
+    private Label lblUmsatz;
 
-    @FXML private ComboBox<String> cbZeitraum;
-    @FXML private DatePicker dpVon;
-    @FXML private DatePicker dpBis;
 
-    @FXML private TableView<HomeDAO.BerichtEintrag> tabelleBerichte;
-    @FXML private TableColumn<HomeDAO.BerichtEintrag, String> colTitel;
-    @FXML private TableColumn<HomeDAO.BerichtEintrag, String> colWert;
-    @FXML private TableColumn<HomeDAO.BerichtEintrag, String> colDetails;
+    @FXML
+    private ComboBox<String> cbZeitraum;
+    @FXML
+    private DatePicker dpVon;
+    @FXML
+    private DatePicker dpBis;
+
+
+    @FXML
+    private TableView<HomeDAO.BerichtEintrag> tabelleBerichte;
+    @FXML
+    private TableColumn<HomeDAO.BerichtEintrag, String> colTitel;
+    @FXML
+    private TableColumn<HomeDAO.BerichtEintrag, String> colWert;
+    @FXML
+    private TableColumn<HomeDAO.BerichtEintrag, String> colDetails;
 
     @FXML
     public void initialize() {

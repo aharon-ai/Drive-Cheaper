@@ -16,14 +16,16 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivecheaper.controllers.FahrzeugController">
     <center>
         <TableView fx:id="tabelleFahrzeuge" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="-1.0" text="ID" />
+                <TableColumn fx:id="colId" prefWidth="15.0" text="ID" />
                 <TableColumn fx:id="colStatus" prefWidth="-1.0" text="Status" />
                 <TableColumn fx:id="colHersteller" prefWidth="-1.0" text="Hersteller" />
                 <TableColumn fx:id="colModell" prefWidth="-1.0" text="Modell" />
@@ -114,6 +116,16 @@
             <children>
                 <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="65.0" spacing="15.0">
                     <children>
+                  <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="356.0">
+                     <children>
+                        <Label layoutX="33.0" layoutY="-9.0" prefHeight="63.0" prefWidth="139.0" text="Fahrzeug" textFill="#60ae54">
+                           <font>
+                              <Font name="Arial Unicode" size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="txtSuche" promptText="🔍 Suchen..." />
                         <Button fx:id="btnNeue" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHizufugenKlicken" text="Hinzufügen" />
                   <Button fx:id="btnAktualisieren" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAktualisierenKlicken" text="Aktualisieren" />
                         <Button fx:id="btnBearbeiten" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBearbeitenKlicken" text="Bearbeiten" />

@@ -16,8 +16,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivecheaper.controllers.MietvertragController">
    <left>
@@ -49,7 +51,10 @@
                         <Insets bottom="5.0" left="25.0" right="25.0" top="8.0" />
                      </VBox.margin>
                   </Button>
-                  <Separator prefWidth="200.0" />
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding></Separator>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMitarbeiterClick" text="Mitarbeiter">
                      <VBox.margin>
                         <Insets bottom="5.0" left="25.0" right="25.0" top="8.0" />
@@ -70,7 +75,7 @@
                         <Insets top="5.0" />
                      </padding>
                   </Separator>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMietvertragClick" text="Vertrage">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMietvertragClick" text="Mietverträge">
                      <VBox.margin>
                         <Insets bottom="5.0" left="25.0" right="25.0" top="8.0" />
                      </VBox.margin>
@@ -90,7 +95,18 @@
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="65.0" spacing="15.0">
                <children>
+                  <Pane prefHeight="46.0" prefWidth="247.0">
+                     <children>
+                        <Label alignment="CENTER" layoutY="-16.0" prefHeight="66.0" prefWidth="190.0" text="Mietvertrag" textFill="#60ae54">
+                           <font>
+                              <Font name="Arial Unicode" size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="txtSuche" promptText="🔍 Suchen..." />
                   <Button mnemonicParsing="false" onAction="#onHinzufuegen" text="Hinzufuegen" />
+                  <Button fx:id="btnZurueckgeben" mnemonicParsing="false" onAction="#onAutoZurueckgeben" text="Zurückgeben" />
                   <Button mnemonicParsing="false" onAction="#onAktualisieren" text="Aktualisieren" />
                   <Button mnemonicParsing="false" onAction="#onBearbeiten" text="Bearbeiten" />
                   <Button mnemonicParsing="false" onAction="#onLoeschen" text="Loeschen" />
@@ -104,15 +120,18 @@
       </VBox>
    </top>
    <center>
-      <TableView fx:id="tabelleMietvertraege">
+      <TableView fx:id="tabelleMietvertraege" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="colId" prefWidth="90.0" text="ID" />
-            <TableColumn fx:id="colKunde" prefWidth="150.0" text="Kunde" />
-            <TableColumn fx:id="colFahrzeug" prefWidth="150.0" text="Fahrzeug" />
-            <TableColumn fx:id="colMitarbeiter" prefWidth="150.0" text="Mitarbeiter" />
-            <TableColumn fx:id="colStartdatum" text="Startdatum" />
-            <TableColumn fx:id="colEndedatum" text="Endedatum" />
-            <TableColumn fx:id="colGesamtkosten" prefWidth="90.0" text="Gesamtkosten" />
+            <TableColumn fx:id="colKunde" prefWidth="200.0" text="Kunde" />
+            <TableColumn fx:id="colFahrzeug" prefWidth="300.0" text="Fahrzeug" />
+            <TableColumn fx:id="colMitarbeiter" prefWidth="200.0" text="Mitarbeiter" />
+            <TableColumn fx:id="colMietTage" editable="false" text="Miet Tage" />
+            <TableColumn fx:id="colTageskosten" editable="false" prefWidth="100.0" text="Tageskosten" />
+            <TableColumn fx:id="colRabatt" editable="false" prefWidth="100.0" text="Rabatt( %): " />
+            <TableColumn fx:id="colGesamtkosten" prefWidth="100.0" text="Gesamtkosten" />
+            <TableColumn fx:id="colStartdatum" prefWidth="100.0" text="Startdatum" />
+            <TableColumn fx:id="colEndedatum" prefWidth="100.0" text="Endedatum" />
          </columns>
       </TableView>
    </center>
@@ -126,19 +145,17 @@
          </columnConstraints>
          <children>
             <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Kunde: " />
-            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Fahrzeug: " GridPane.columnIndex="2" />
+            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Fahrzeug: " GridPane.rowIndex="2" />
 
-            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Mitarbeiter: " GridPane.rowIndex="2" />
-            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Gesamtkosten:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="txtGesamtkosten" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Mitarbeiter: " GridPane.rowIndex="3" />
 
-            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Startdatum:" GridPane.rowIndex="3" />
-            <DatePicker fx:id="dpStartdatum" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label alignment="CENTER_RIGHT" text="Endedatum:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <DatePicker fx:id="dpEndedatum" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Startdatum: " GridPane.columnIndex="2" />
+            <DatePicker fx:id="dpStartdatum" GridPane.columnIndex="3" />
+            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Endedatum: " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dpEndedatum" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <ComboBox fx:id="cbKunde" prefWidth="170.0" GridPane.columnIndex="1" />
-            <ComboBox fx:id="cbMitarbeiter" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ComboBox fx:id="cbFahrzeug" prefWidth="170.0" GridPane.columnIndex="3" />
+            <ComboBox fx:id="cbMitarbeiter" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="cbFahrzeug" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets bottom="16.0" left="125.0" right="25.0" top="16.0" />

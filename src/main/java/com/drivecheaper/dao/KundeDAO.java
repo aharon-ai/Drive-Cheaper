@@ -338,4 +338,22 @@ public class KundeDAO {
             return false;
         }
     }
+
+    // Holt gezielt den Rabatt eines Firmenkunden aus der Datenbank
+    public static double getFirmenRabatt(int kundeId) {
+        String query = "SELECT rabatt FROM firmenkunde WHERE kunde_id = ?";
+        try (Connection connection = DriverManager.getConnection(connectionURL, user, password);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, kundeId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getDouble("rabatt");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Rabatt laden: " + e.getMessage());
+        }
+        return 0.0; // Privatkunden oder Fehler = 0% Rabatt
+    }
+
 }

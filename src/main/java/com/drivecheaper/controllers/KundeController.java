@@ -15,53 +15,75 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 
 public class KundeController {
+
+    // Das Suchfeld
+    @FXML private TextField txtSuche;
+
     @FXML private TextField txtVorname;
     // Speichert die ID des Kunden, den wir gerade angeklickt haben (-1 bedeutet: Niemand ist ausgewählt)
     private int ausgewaehlterKundeId = -1;
-    @FXML private TextField txtNachname;
-    @FXML private DatePicker dpGeburtsDatum;
-    @FXML private TextField txtAdresse;
-    @FXML private TextField txtHausnummer;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtTelefon;
-    @FXML private ComboBox<Ort> cbOrt;
+    @FXML
+    private TextField txtNachname;
+    @FXML
+    private DatePicker dpGeburtsDatum;
+    @FXML
+    private TextField txtAdresse;
+    @FXML
+    private TextField txtHausnummer;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtTelefon;
+    @FXML
+    private ComboBox<Ort> cbOrt;
 
-    @FXML private CheckBox chkFirmenkunde;
-    @FXML private TextField txtFirmenname;
-    @FXML private TextField txtAnsprechpartner;
-    @FXML private TextField txtRabatt;
 
-    @FXML private TableView<KundeDAO.KundeUebersicht> tabelleKunden;
-    @FXML private TableColumn<KundeDAO.KundeUebersicht, Integer> colId;
-    @FXML private TableColumn<KundeDAO.KundeUebersicht, String> colVorname;
-    @FXML private TableColumn<KundeDAO.KundeUebersicht, String> colNachname;
-    @FXML private TableColumn<KundeDAO.KundeUebersicht, LocalDate> colGeburtsdatum;
-    @FXML private TableColumn<KundeDAO.KundeUebersicht, String> colKundentyp;
-    @FXML private TableColumn<KundeDAO.KundeUebersicht, String> colFirmenname;
+    @FXML
+    private CheckBox chkFirmenkunde;
+    @FXML
+    private TextField txtFirmenname;
+    @FXML
+    private TextField txtAnsprechpartner;
+    @FXML
+    private TextField txtRabatt;
+
+
+    @FXML
+    private TableView<KundeDAO.KundeUebersicht> tabelleKunden;
+    @FXML
+    private TableColumn<KundeDAO.KundeUebersicht, Integer> colId;
+    @FXML
+    private TableColumn<KundeDAO.KundeUebersicht, String> colVorname;
+    @FXML
+    private TableColumn<KundeDAO.KundeUebersicht, String> colNachname;
+    @FXML
+    private TableColumn<KundeDAO.KundeUebersicht, LocalDate> colGeburtsdatum;
+    @FXML
+    private TableColumn<KundeDAO.KundeUebersicht, String> colKundentyp;
+    @FXML
+    private TableColumn<KundeDAO.KundeUebersicht, String> colFirmenname;
+
+    // Speichert die Original-Liste für die Suche
+    private ObservableList<KundeDAO.KundeUebersicht> kundenListeOriginal;
 
     @FXML
     public void onHomeClick(ActionEvent event) {
         ViewNavigator.navigate(event, "HomeView.fxml");
     }
-
     @FXML
     public void onFahrzeugeClick(ActionEvent event) {
         ViewNavigator.navigate(event, "FahrzeugView.fxml");
     }
-
     @FXML
     public void onMitarbeiterClick(ActionEvent event) {
         ViewNavigator.navigate(event, "MitarbeiterView.fxml");
     }
-
     @FXML
     public void onKundeClick(ActionEvent event) {
         ViewNavigator.navigate(event, "KundeView.fxml");
     }
-
     @FXML
     public void onMietvertragClick(ActionEvent event) {
         ViewNavigator.navigate(event, "MietvertragView.fxml");
@@ -78,6 +100,14 @@ public class KundeController {
         colFirmenname.setCellValueFactory(new PropertyValueFactory<>("firmenname"));
 
         cbOrt.setItems(OrtDAO.ladeAlleOrte());
+
+        // --- WICHTIG: das Feld leer wird, wenn man ins Leere klickt
+        tabelleKunden.setOnMouseClicked(event -> {
+            if (tabelleKunden.getSelectionModel().getSelectedItem() == null) {
+                felderLeeren();
+            }
+        });
+
         ladeKundenInTabelle();
         umschaltenFirmenkundenFelder(false);
 
@@ -87,6 +117,44 @@ public class KundeController {
                 kundeInFelderLaden(neuerWert);
             }
         });
+    }
+
+    // HILFSMETHODE MIT SUCHEN
+    private void ladeKundenInTabelle() {
+        // 1. Alle Kunden frisch aus der Datenbank laden
+        kundenListeOriginal = KundeDAO.ladeKundenUebersicht();
+
+        // 2. Die Daten in eine "gefilterte Liste" packen
+        javafx.collections.transformation.FilteredList<KundeDAO.KundeUebersicht> filteredData =
+                new javafx.collections.transformation.FilteredList<>(kundenListeOriginal, b -> true);
+
+        // 3. Zuhören, was der Nutzer in das Suchfeld tippt
+        if (txtSuche != null) {
+            txtSuche.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(kunde -> {
+                    // Wenn das Suchfeld leer ist, zeige alle Kunden
+                    if (newValue == null || newValue.isBlank()) return true;
+
+                    // Suchwort in Kleinbuchstaben umwandeln
+                    String suchWort = newValue.toLowerCase();
+
+                    // Suchen nach Vorname, Nachname oder Firmenname
+                    if (kunde.getVorname() != null && kunde.getVorname().toLowerCase().contains(suchWort)) return true;
+                    if (kunde.getNachname() != null && kunde.getNachname().toLowerCase().contains(suchWort)) return true;
+                    if (kunde.getFirmenname() != null && kunde.getFirmenname().toLowerCase().contains(suchWort)) return true;
+
+                    return false; // Nichts gefunden -> Ausblenden!
+                });
+            });
+        }
+
+        // 4. Damit man die Spalten trotzdem noch durch Klicken sortieren kann:
+        javafx.collections.transformation.SortedList<KundeDAO.KundeUebersicht> sortedData =
+                new javafx.collections.transformation.SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tabelleKunden.comparatorProperty());
+
+        // 5. Die fertig gefilterte Liste in die Tabelle packen
+        tabelleKunden.setItems(sortedData);
     }
 
     @FXML
@@ -108,7 +176,7 @@ public class KundeController {
 
             if (ort == null) {
                 zeigeMeldung(Alert.AlertType.ERROR, "Eingabefehler", "Bitte wähle einen Ort aus der Liste aus.");
-                return; // Bricht das Speichern ab, wenn kein Ort gewählt wurde
+                return;
             }
             int ortId = ort.getOrtId();
 
@@ -122,11 +190,10 @@ public class KundeController {
             if (chkFirmenkunde.isSelected()) {
                 String firmenname = txtFirmenname.getText();
                 String ansprechpartner = txtAnsprechpartner.getText();
-                double rabatt = Double.parseDouble(txtRabatt.getText());
+                double rabatt = txtRabatt.getText().isBlank() ? 0 : Double.parseDouble(txtRabatt.getText().replace(",", "."));
 
                 if (firmenname.isBlank() || ansprechpartner.isBlank()) {
-                    zeigeMeldung(Alert.AlertType.ERROR, "Eingabefehler",
-                            "Bitte Firmenname und Ansprechpartner ausfuellen.");
+                    zeigeMeldung(Alert.AlertType.ERROR, "Eingabefehler", "Bitte Firmenname und Ansprechpartner ausfuellen.");
                     return;
                 }
 
@@ -172,7 +239,7 @@ public class KundeController {
                     txtAdresse.getText(), txtHausnummer.getText(), txtEmail.getText(), txtTelefon.getText(),
                     ort.getOrtId(), chkFirmenkunde.isSelected(),
                     txtFirmenname.getText(), txtAnsprechpartner.getText(),
-                    txtRabatt.getText().isBlank() ? 0 : Double.parseDouble(txtRabatt.getText())
+                    txtRabatt.getText().isBlank() ? 0 : Double.parseDouble(txtRabatt.getText().replace(",", "."))
             );
 
             if (erfolg) {
@@ -207,27 +274,17 @@ public class KundeController {
     @FXML
     public void onAbbrechenKlicken() {
         felderLeeren();
-        tabelleKunden.getSelectionModel().clearSelection(); // Optional: Hebt die Markierung in der Tabelle auf
-        zeigeMeldung(Alert.AlertType.INFORMATION, "Abgebrochen", "Die Eingabefelder wurden geleert.");
-    }
-
-    private void ladeKundenInTabelle() {
-        ObservableList<KundeDAO.KundeUebersicht> kundenListe = KundeDAO.ladeKundenUebersicht();
-        tabelleKunden.setItems(kundenListe);
+        tabelleKunden.getSelectionModel().clearSelection();
     }
 
     private void umschaltenFirmenkundenFelder(boolean aktiv) {
         txtFirmenname.setDisable(!aktiv);
         txtAnsprechpartner.setDisable(!aktiv);
         txtRabatt.setDisable(!aktiv);
-
     }
-
-
 
     private void felderLeeren() {
         ausgewaehlterKundeId = -1; // Wieder zurücksetzen!
-        txtVorname.clear();
         txtVorname.clear();
         txtNachname.clear();
         dpGeburtsDatum.setValue(null);
@@ -244,12 +301,10 @@ public class KundeController {
     }
 
     private void kundeInFelderLaden(KundeDAO.KundeUebersicht kunde) {
-
         // ID merken!
         ausgewaehlterKundeId = kunde.getKundeId();
 
         // 1. Basis-Daten füllen
-        txtVorname.setText(kunde.getVorname());
         txtVorname.setText(kunde.getVorname());
         txtNachname.setText(kunde.getNachname());
         dpGeburtsDatum.setValue(kunde.getGeburtsdatum());
@@ -258,8 +313,7 @@ public class KundeController {
         txtEmail.setText(kunde.getEmail());
         txtTelefon.setText(kunde.getTelefon());
 
-
-        // 2. Den richtigen Ort im Dropdown-Menü (ComboBox) auswählen
+        // 2. Den richtigen Ort im Dropdown-Menü auswählen
         for (Ort ort : cbOrt.getItems()) {
             if (ort.getOrtId() == kunde.getOrtId()) {
                 cbOrt.setValue(ort);
@@ -272,10 +326,15 @@ public class KundeController {
             chkFirmenkunde.setSelected(true);
             umschaltenFirmenkundenFelder(true);
             txtFirmenname.setText(kunde.getFirmenname());
+
+            // Rabatt aus der DB holen (da er nicht in der Tabellen-Übersicht steht)
+            double rabatt = KundeDAO.getFirmenRabatt(kunde.getKundeId());
+            txtRabatt.setText(String.valueOf(rabatt));
         } else {
             chkFirmenkunde.setSelected(false);
             umschaltenFirmenkundenFelder(false);
             txtFirmenname.clear();
+            txtRabatt.clear();
         }
     }
 
@@ -286,6 +345,4 @@ public class KundeController {
         alert.setContentText(nachricht);
         alert.showAndWait();
     }
-
-
 }

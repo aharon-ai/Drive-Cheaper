@@ -14,8 +14,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivecheaper.controllers.MitarbeiterController">
    <left>
@@ -47,7 +49,10 @@
                         <Insets bottom="5.0" left="25.0" right="25.0" top="8.0" />
                      </VBox.margin>
                   </Button>
-                  <Separator prefWidth="200.0" />
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding></Separator>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMitarbeiterClick" text="Mitarbeiter">
                      <VBox.margin>
                         <Insets bottom="5.0" left="25.0" right="25.0" top="8.0" />
@@ -88,6 +93,16 @@
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="65.0" spacing="15.0">
                <children>
+                  <Pane prefHeight="46.0" prefWidth="359.0">
+                     <children>
+                        <Label alignment="CENTER" layoutX="-8.0" layoutY="3.0" prefHeight="39.0" prefWidth="216.0" text="Mitarbeiter" textFill="#60ae54">
+                           <font>
+                              <Font name="Arial Unicode" size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="txtSuche" promptText="🔍 Suchen..." />
                   <Button mnemonicParsing="false" onAction="#onHinzufuegen" text="Hinzufuegen" />
                   <Button mnemonicParsing="false" onAction="#onAktualisieren" text="Aktualisieren" />
                   <Button mnemonicParsing="false" onAction="#onBearbeiten" text="Bearbeiten" />

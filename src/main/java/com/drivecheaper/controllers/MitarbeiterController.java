@@ -2,6 +2,7 @@ package com.drivecheaper.controllers;
 
 import com.drivecheaper.dao.MitarbeiterDAO;
 import com.drivecheaper.model.Mitarbeiter;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -11,38 +12,55 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
 
 public class MitarbeiterController {
-    @FXML private TableView<Mitarbeiter> tabelleMitarbeiter;
-    @FXML private TableColumn<Mitarbeiter, Integer> colId;
-    @FXML private TableColumn<Mitarbeiter, String> colVorname;
-    @FXML private TableColumn<Mitarbeiter, String> colNachname;
-    @FXML private TableColumn<Mitarbeiter, String> colEmail;
-    @FXML private TableColumn<Mitarbeiter, String> colTelefon;
 
-    @FXML private TextField txtVorname;
-    @FXML private TextField txtNachname;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtTelefon;
+
+
+    @FXML
+    private TableView<Mitarbeiter> tabelleMitarbeiter;
+    @FXML
+    private TableColumn<Mitarbeiter, Integer> colId;
+    @FXML
+    private TableColumn<Mitarbeiter, String> colVorname;
+    @FXML
+    private TableColumn<Mitarbeiter, String> colNachname;
+    @FXML
+    private TableColumn<Mitarbeiter, String> colEmail;
+    @FXML
+    private TableColumn<Mitarbeiter, String> colTelefon;
+
+
+    @FXML
+    private TextField txtVorname;
+    @FXML
+    private TextField txtNachname;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtTelefon;
+
+
+    // Das Suchfeld
+    @FXML private TextField txtSuche;
+
+    // Speichert die Original-Liste für die Suche
+    private ObservableList<Mitarbeiter> mitarbeiterListeOriginal;
 
     @FXML
     public void onHomeClick(ActionEvent event) {
         ViewNavigator.navigate(event, "HomeView.fxml");
     }
-
     @FXML
     public void onFahrzeugeClick(ActionEvent event) {
         ViewNavigator.navigate(event, "FahrzeugView.fxml");
     }
-
     @FXML
     public void onMitarbeiterClick(ActionEvent event) {
         ViewNavigator.navigate(event, "MitarbeiterView.fxml");
     }
-
     @FXML
     public void onKundeClick(ActionEvent event) {
         ViewNavigator.navigate(event, "KundeView.fxml");
     }
-
     @FXML
     public void onMietvertragClick(ActionEvent event) {
         ViewNavigator.navigate(event, "MietvertragView.fxml");
@@ -67,7 +85,52 @@ public class MitarbeiterController {
             }
         });
 
+        // Damit das Formular geleert wird, wenn man ins "Leere" klickt ---
+        tabelleMitarbeiter.setOnMouseClicked(event -> {
+            if (tabelleMitarbeiter.getSelectionModel().getSelectedItem() == null) {
+                onAbbrechen();
+            }
+        });
+
         ladeMitarbeiter();
+    }
+
+    // Hifsmethode mit Suchen
+    private void ladeMitarbeiter() {
+        // 1. Originaldaten laden
+        mitarbeiterListeOriginal = MitarbeiterDAO.ladeAlleMitarbeiter();
+
+        // 2. Die Daten in eine "gefilterte Liste" packen
+        javafx.collections.transformation.FilteredList<Mitarbeiter> filteredData =
+                new javafx.collections.transformation.FilteredList<>(mitarbeiterListeOriginal, b -> true);
+
+        // 3. Zuhören, was der Nutzer in das Suchfeld tippt
+        if (txtSuche != null) {
+            txtSuche.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(mitarbeiter -> {
+                    // Wenn das Suchfeld leer ist, zeige alle Mitarbeiter
+                    if (newValue == null || newValue.isBlank()) return true;
+
+                    String suchWort = newValue.toLowerCase();
+
+                    // Suchen nach Vorname, Nachname, Email oder Telefon
+                    if (mitarbeiter.getVorname() != null && mitarbeiter.getVorname().toLowerCase().contains(suchWort)) return true;
+                    if (mitarbeiter.getNachname() != null && mitarbeiter.getNachname().toLowerCase().contains(suchWort)) return true;
+                    if (mitarbeiter.getEmail() != null && mitarbeiter.getEmail().toLowerCase().contains(suchWort)) return true;
+                    if (mitarbeiter.getTelefonnummer() != null && mitarbeiter.getTelefonnummer().toLowerCase().contains(suchWort)) return true;
+
+                    return false; // Nichts gefunden -> Ausblenden!
+                });
+            });
+        }
+
+        // 4. Sortierung beibehalten
+        javafx.collections.transformation.SortedList<Mitarbeiter> sortedData =
+                new javafx.collections.transformation.SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tabelleMitarbeiter.comparatorProperty());
+
+        // 5. Die gefilterte Liste in die Tabelle packen
+        tabelleMitarbeiter.setItems(sortedData);
     }
 
     @FXML
@@ -82,7 +145,7 @@ public class MitarbeiterController {
         if (erfolg) {
             zeigeMeldung(Alert.AlertType.INFORMATION, "Erfolg", "Der Mitarbeiter wurde erfolgreich gespeichert!");
             ladeMitarbeiter();
-            felderLeeren();
+            onAbbrechen(); // Felder automatisch leeren
         } else {
             zeigeMeldung(Alert.AlertType.ERROR, "Fehler", "Mitarbeiter konnte nicht gespeichert werden.");
         }
@@ -108,7 +171,7 @@ public class MitarbeiterController {
         if (erfolg) {
             zeigeMeldung(Alert.AlertType.INFORMATION, "Erfolg", "Der Mitarbeiter wurde erfolgreich bearbeitet!");
             ladeMitarbeiter();
-            felderLeeren();
+            onAbbrechen(); // Felder automatisch leeren
         } else {
             zeigeMeldung(Alert.AlertType.ERROR, "Fehler", "Mitarbeiter konnte nicht bearbeitet werden.");
         }
@@ -126,7 +189,7 @@ public class MitarbeiterController {
         if (erfolg) {
             zeigeMeldung(Alert.AlertType.INFORMATION, "Erfolg", "Der Mitarbeiter wurde erfolgreich gelöscht!");
             ladeMitarbeiter();
-            felderLeeren();
+            onAbbrechen(); // Felder automatisch leeren
         } else {
             zeigeMeldung(Alert.AlertType.ERROR, "Fehler", "Mitarbeiter konnte nicht gelöscht werden (Hat er evtl. noch Mietverträge?).");
         }
@@ -141,6 +204,7 @@ public class MitarbeiterController {
     @FXML
     public void onAktualisieren() {
         ladeMitarbeiter();
+        onAbbrechen(); // --- NEU: Löscht die Auswahl beim Klicken auf Aktualisieren ---
     }
 
     private boolean eingabeValidieren() {
@@ -151,10 +215,6 @@ public class MitarbeiterController {
             return false;
         }
         return true;
-    }
-
-    private void ladeMitarbeiter() {
-        tabelleMitarbeiter.setItems(MitarbeiterDAO.ladeAlleMitarbeiter());
     }
 
     private void felderLeeren() {
@@ -171,5 +231,4 @@ public class MitarbeiterController {
         alert.setContentText(text);
         alert.showAndWait();
     }
-
 }
